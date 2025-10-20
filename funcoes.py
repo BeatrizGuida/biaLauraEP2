@@ -38,3 +38,16 @@ def posiciona_frota(dicionario_frota):
                 coluna= coordenada[1]
                 tabuleiro[linha][coluna]= 1
     return tabuleiro
+
+
+def afundados (dicio_frota, tabuleiro):
+    lista_nome=[]
+    soma=0
+    for nome, listas in dicio_frota.items():
+        for posicao in listas:
+            if tabuleiro[posicao] == 'X':
+                if nome not in lista_nome:
+                    lista_nome.append(nome)
+                    soma+=1
+                    
+    return soma
