@@ -29,3 +29,12 @@ def faz_jogada (tabuleiro, linha, coluna):
     return tabuleiro
 
 
+def posiciona_frota(dicionario_frota):
+    tabuleiro= [[0 for _ in range(10)] for _ in range(10)]
+    for navio in dicionario_frota:
+        for posicao in dicionario_frota[navio]:
+            for coordenada in posicao:
+                linha= coordenada[0]
+                coluna= coordenada[1]
+                tabuleiro[linha][coluna]= 1
+    return tabuleiro
