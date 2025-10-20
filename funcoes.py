@@ -57,13 +57,23 @@ def afundados(dicio_frota, tabuleiro):
     return soma
 
 
+# def posicao_valida (dicio_frota, linha, coluna, orientacao, tamanho):
+#     posicao= define_posicoes(linha, coluna, orientacao,tamanho)
+
+#     for direcoes in posicao:
+#         for lista in dicio_frota.values():
+#             if direcoes in lista:
+#                 return False
+        
+#     return True
+
+
 def posicao_valida (dicio_frota, linha, coluna, orientacao, tamanho):
     posicao= define_posicoes(linha, coluna, orientacao,tamanho)
 
     for direcoes in posicao:
-        for lista in dicio_frota.values():
-            if direcoes in lista:
-                return False
-        
+        for listas in dicio_frota.values():
+            for lista in listas:
+                if direcoes in lista:
+                    return False
     return True
-
