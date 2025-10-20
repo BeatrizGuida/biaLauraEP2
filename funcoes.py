@@ -45,9 +45,12 @@ def afundados (dicio_frota, tabuleiro):
     soma=0
     for nome, listas in dicio_frota.items():
         for posicao in listas:
-            if tabuleiro[posicao] == 'X':
+            linha=posicao[0]
+            coluna=posicao[1]
+            if tabuleiro[linha][coluna] == 'X':
                 if nome not in lista_nome:
                     lista_nome.append(nome)
                     soma+=1
                     
     return soma
+
