@@ -12,8 +12,8 @@ def define_posicoes(linha, coluna, orientacao,tamanho):
 def preenche_frota (dicio_frota, nome_navio, linha, coluna, orientacao, tamanho):
     lista= define_posicoes(linha, coluna, orientacao, tamanho)
     if nome_navio in dicio_frota:
-        dicio_frota[nome_navio] += lista
+        dicio_frota[nome_navio] += [lista]
     else:
-        dicio_frota[nome_navio]= lista
+        dicio_frota[nome_navio]= [lista]
 
     return dicio_frota
