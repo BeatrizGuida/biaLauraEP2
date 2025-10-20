@@ -62,7 +62,7 @@ def posicao_valida (dicio_frota, linha, coluna, orientacao, tamanho):
 
     for direcoes in posicao:
         for lista in dicio_frota.values():
-            if posicao in lista:
+            if direcoes in lista:
                 return False
         
     return True
