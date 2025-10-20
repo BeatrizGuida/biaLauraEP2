@@ -17,3 +17,15 @@ def preenche_frota (dicio_frota, nome_navio, linha, coluna, orientacao, tamanho)
         dicio_frota[nome_navio]= [lista]
 
     return dicio_frota
+
+
+def faz_jogada (tabuleiro, linha, coluna):
+    item= tabuleiro[linha][coluna]
+    if item == '0':
+        tabuleiro= tabuleiro.replace(item, '-')
+    elif item == '1':
+        tabuleiro= tabuleiro.replace(item, 'X')
+
+    return tabuleiro
+
+
