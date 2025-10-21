@@ -61,9 +61,11 @@ def posicao_valida (dicio_frota, linha, coluna, orientacao, tamanho):
     posicao= define_posicoes(linha, coluna, orientacao,tamanho)
 
     for direcoes in posicao:
-        for lista in dicio_frota.values():
-            if direcoes in lista:
-                return False
+        for navios in dicio_frota.keys():
+            lista= navios.values()
+            for i in range(len(lista)):
+                if direcoes in lista:
+                    return False
         
     return True
 
