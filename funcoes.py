@@ -65,7 +65,7 @@ def posicao_valida (dicio_frota, linha, coluna, orientacao, tamanho):
         for navios in dicio_frota.keys():
             lista= navios.values()
             for i in range(len(lista)):
-                if direcoes in lista:
-                    return False
+                if direcoes not in lista:
+                    return True
         
-    return True
+    return False
