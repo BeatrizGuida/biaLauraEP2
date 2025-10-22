@@ -57,6 +57,7 @@ def afundados(dicio_frota, tabuleiro):
     return soma
 
 
+
 def posicao_valida (dicio_frota, linha, coluna, orientacao, tamanho):
     posicao= define_posicoes(linha, coluna, orientacao,tamanho)
 
@@ -68,4 +69,3 @@ def posicao_valida (dicio_frota, linha, coluna, orientacao, tamanho):
                     return False
         
     return True
-
