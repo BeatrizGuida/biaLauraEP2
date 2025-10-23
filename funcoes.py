@@ -60,10 +60,13 @@ def afundados(dicio_frota, tabuleiro):
 
 def posicao_valida (dicio_frota, linha, coluna, orientacao, tamanho):
     posicoes_novo_navio = define_posicoes(linha, coluna, orientacao, tamanho)
+    tabuleiro= posiciona_frota(dicio_frota)
     
     for lista_navios in dicio_frota.values():
         for navio in lista_navios:
             for posicao in navio:
                 if posicao in posicoes_novo_navio:
+                    return False
+                if posicao not in tabuleiro:
                     return False
     return True
