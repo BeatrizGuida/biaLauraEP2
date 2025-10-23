@@ -71,6 +71,5 @@ def posicao_valida (dicio_frota, linha, coluna, orientacao, tamanho):
                 if posicao in posicoes_novo_navio:
                     return False
 
-   return True
+    return True
 
-   
