@@ -67,6 +67,7 @@ def posicao_valida (dicio_frota, linha, coluna, orientacao, tamanho):
             for posicao in navio:
                 if posicao in posicoes_novo_navio:
                     return False
-                if posicao not in tabuleiro:
+                if posicoes_novo_navio not in tabuleiro:
                     return False
+
     return True
