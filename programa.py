@@ -54,6 +54,29 @@ frota = {
     "submarino": []
 }
 
+# Frota do oponente (dado enunciado)
+
+frota_oponente = {
+    'porta-aviões': [
+        [[9, 1], [9, 2], [9, 3], [9, 4]]
+    ],
+    'navio-tanque': [
+        [[6, 0], [6, 1], [6, 2]],
+        [[4, 3], [5, 3], [6, 3]]
+    ],
+    'contratorpedeiro': [
+        [[1, 6], [1, 7]],
+        [[0, 5], [1, 5]],
+        [[3, 6], [3, 7]]
+    ],
+    'submarino': [
+        [[2, 7]],
+        [[0, 6]],
+        [[9, 7]],
+        [[7, 6]]
+    ]
+}
+
 MAX = 9  # índices válidos 0..9
 
 def monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente):
@@ -70,7 +93,7 @@ def monta_tabuleiros(tabuleiro_jogador, tabuleiro_oponente):
     return texto
 
 
-# posicionar frota  (entrada)
+posiciona_frota(frota_oponente)
 
 i = 0
 while i < len(lista_embarcacoes):
@@ -133,29 +156,6 @@ while i < len(lista_embarcacoes):
             print("Esta posição não está válida!")
     i = i + 1
 
-
-# Frota do oponente (dado enunciado)
-
-frota_oponente = {
-    'porta-aviões': [
-        [[9, 1], [9, 2], [9, 3], [9, 4]]
-    ],
-    'navio-tanque': [
-        [[6, 0], [6, 1], [6, 2]],
-        [[4, 3], [5, 3], [6, 3]]
-    ],
-    'contratorpedeiro': [
-        [[1, 6], [1, 7]],
-        [[0, 5], [1, 5]],
-        [[3, 6], [3, 7]]
-    ],
-    'submarino': [
-        [[2, 7]],
-        [[0, 6]],
-        [[9, 7]],
-        [[7, 6]]
-    ]
-}
 
 
 # Cria tabuleiros
