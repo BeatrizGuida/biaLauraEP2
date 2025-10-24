@@ -1,43 +1,43 @@
 from funcoes import posicao_valida, define_posicoes, preenche_frota
 
-embarcacoes = [
-    ("porta-aviões", 4, 1),
-    ("navio-tanque", 3, 2),
-    ("contratorpedeiro", 2, 3),
-    ("submarino", 1, 4)
-]
+lista_embarcacoes = ['porta-aviões', 'navio-tanque', 'contratorpedeiro', 'submarino']
+lista_tamanho = [4, 3, 2, 1]
+quantidades = [1, 2, 3, 4]
 
-dicio_frota = {
+frota = {
     "porta-aviões": [],
     "navio-tanque": [],
     "contratorpedeiro": [],
-    "submarino": [],
+    "submarino": []
 }
 
-for nome, tamanho, quantidade in embarcacoes:
+for i in range(len(lista_embarcacoes)):
+    nome = lista_embarcacoes[i]
+    tamanho = lista_tamanho[i]
+    quantidade = quantidades[i]
+
     for _ in range(quantidade):
-        print(f'Insira as informações referentes ao navio {nome} que possui tamanho {tamanho}')
+        print(f"Insira as informações referentes ao navio {nome} que possui tamanho {tamanho}")
+        
+        linha = int(input("Linha: "))
+        coluna = int(input("Coluna: "))
 
-        while True:
-            linha = int(input('Linha: '))
-            coluna = int(input('Coluna: '))
+        if nome != "submarino":
+            orientacao_input = int(input("[1] Vertical [2] Horizontal >"))
+            orientacao = "vertical" if orientacao_input == 1 else "horizontal"
+        else:
+            orientacao = "horizontal"  
 
-            if nome != 'submarino':
-                orientacao_num = int(input('[1] Vertical [2] Horizontal >'))
-                if orientacao_num == 1:
-                    orientacao = 'vertical'
-                elif orientacao_num == 2:
-                    orientacao = 'horizontal'
-                else:
-                    print('Orientação inválida! Digite 1 ou 2.')
-                    continue
+        while not posicao_valida(frota, linha, coluna, orientacao, tamanho):
+            print("Esta posição não está válida!")
+            linha = int(input("Linha: "))
+            coluna = int(input("Coluna: "))
+            if nome != "submarino":
+                orientacao_input = int(input("[1] Vertical [2] Horizontal >"))
+                orientacao = "vertical" if orientacao_input == 1 else "horizontal"
             else:
-                orientacao = None
+                orientacao = "horizontal"
 
-            if posicao_valida(dicio_frota, linha, coluna, orientacao, tamanho):
-                dicio_frota = preenche_frota(dicio_frota, nome, linha, coluna, orientacao, tamanho)
-                break
-            else:
-                print('Esta posição não está válida!')
+        frota = preenche_frota(frota, nome, linha, coluna, orientacao, tamanho)
 
-print(dicio_frota)
+print(frota)
