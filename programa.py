@@ -17,27 +17,23 @@ for i in range(len(lista_embarcacoes)):
     quantidade = quantidades[i]
 
     for _ in range(quantidade):
-        print(f"Insira as informações referentes ao navio {nome} que possui tamanho {tamanho}")
-        
-        linha = int(input("Linha: "))
-        coluna = int(input("Coluna: "))
+        posicao_valida_flag = False
 
-        if nome != "submarino":
-            orientacao_input = int(input("[1] Vertical [2] Horizontal >"))
-            orientacao = "vertical" if orientacao_input == 1 else "horizontal"
-        else:
-            orientacao = "horizontal"  
-
-        while not posicao_valida(frota, linha, coluna, orientacao, tamanho):
-            print("Esta posição não está válida!")
+        while not posicao_valida_flag:
+            print(f"Insira as informações referentes ao navio {nome} que possui tamanho {tamanho}")
             linha = int(input("Linha: "))
             coluna = int(input("Coluna: "))
+
             if nome != "submarino":
                 orientacao_input = int(input("[1] Vertical [2] Horizontal >"))
                 orientacao = "vertical" if orientacao_input == 1 else "horizontal"
             else:
-                orientacao = "horizontal"
+                orientacao = "horizontal" 
 
-        frota = preenche_frota(frota, nome, linha, coluna, orientacao, tamanho)
+            if posicao_valida(frota, linha, coluna, orientacao, tamanho):
+                frota = preenche_frota(frota, nome, linha, coluna, orientacao, tamanho)
+                posicao_valida_flag = True
+            else:
+                print("Esta posição não está válida!")
 
 print(frota)
