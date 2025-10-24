@@ -37,3 +37,66 @@ for i in range(len(lista_embarcacoes)):
                 print("Esta posição não está válida!")
 
 print(frota)
+
+
+from funcoes import posiciona_frota, faz_jogada, afundados
+
+# dicionario dado no enunciado
+frota_jogador = {
+    "porta-aviões": [[[0, 0], [0, 1], [0, 2], [0, 3]]],
+    "navio-tanque": [[[2, 1], [3, 1], [4, 1]], [[9, 0], [9, 1], [9, 2]]],
+    "contratorpedeiro": [[[5, 4], [5, 5]], [[6, 7], [7, 7]], [[1, 9], [2, 9]]],
+    "submarino": [[[3, 4]], [[4, 8]], [[8, 9]], [[0, 9]]]
+}
+
+frota_oponente = {
+    "porta-aviões": [[[1, 1], [1, 2], [1, 3], [1, 4]]],
+    "navio-tanque": [[[3, 3], [3, 4], [3, 5]], [[6, 0], [6, 1], [6, 2]]],
+    "contratorpedeiro": [[[5, 6], [5, 7]], [[8, 3], [8, 4]], [[2, 8], [3, 8]]],
+    "submarino": [[[9, 9]], [[0, 0]], [[4, 5]], [[7, 3]]]
+}
+
+# tabuleiros
+tabuleiro_jogador = posiciona_frota(frota_jogador)
+tabuleiro_oponente = posiciona_frota(frota_oponente)
+tabuleiro_oponente_visivel = [[' ' for _ in range(10)] for _ in range(10)]
+
+# loop principal do jogo 
+jogando = True
+
+while jogando:
+    print("Seu tabuleiro:")
+    for linha in tabuleiro_jogador:
+        print(' '.join(str(item) for item in linha))
+
+    print("Tabuleiro do oponente:")
+    for linha in tabuleiro_oponente_visivel:
+        print(' '.join(linha))
+
+    jogada_valida = False
+    while not jogada_valida:
+        linha_ataque = int(input("Digite a linha de ataque (0-9): "))
+        coluna_ataque = int(input("Digite a coluna de ataque (0-9): "))
+
+        if tabuleiro_oponente_visivel[linha_ataque][coluna_ataque] in ['-', 'X']:
+            print("Você já jogou nessa posição! Escolha outra.")
+        else:
+            jogada_valida = True  # sai do while
+
+    # atualiza tabuleiros com o resultado da jogada
+    if tabuleiro_oponente[linha_ataque][coluna_ataque] == 1:
+        print("Acertou um navio!")
+        tabuleiro_oponente[linha_ataque][coluna_ataque] = 'X'
+        tabuleiro_oponente_visivel[linha_ataque][coluna_ataque] = 'X'
+    else:
+        print("Errou o tiro!")
+        tabuleiro_oponente[linha_ataque][coluna_ataque] = '-'
+        tabuleiro_oponente_visivel[linha_ataque][coluna_ataque] = '-'
+
+    # verifica navios afundados
+    navios_afundados = afundados(frota_oponente, tabuleiro_oponente)
+    print(f"Navios afundados do oponente: {navios_afundados}")
+
+    if navios_afundados == 10:
+        print("Parabéns! Você venceu a batalha!")
+        jogando = False
