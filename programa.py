@@ -1,37 +1,43 @@
 from funcoes import posicao_valida, define_posicoes, preenche_frota
 
-lista_embarcacoes= ['porta-aviões', 'navio-tanque', 'contratorpedeiro', 'submarino']
-lista_tamanho=[4, 3, 2, 1]
+embarcacoes = [
+    ("porta-aviões", 4, 1),
+    ("navio-tanque", 3, 2),
+    ("contratorpedeiro", 2, 3),
+    ("submarino", 1, 4)
+]
 
 dicio_frota = {
-    "porta-aviões":[],
-    "navio-tanque":[],
-    "contratorpedeiro":[],
+    "porta-aviões": [],
+    "navio-tanque": [],
+    "contratorpedeiro": [],
     "submarino": [],
 }
 
-for i in range(len(lista_embarcacoes)):
-    nome= lista_embarcacoes[i]
-    tamanho= lista_tamanho[i]
-    inicial= input(f'Insira as informações referentes ao navio {nome} que possui tamanho {tamanho}')
+for nome, tamanho, quantidade in embarcacoes:
+    for _ in range(quantidade):
+        print(f'Insira as informações referentes ao navio {nome} que possui tamanho {tamanho}')
 
-    linha= int(input('Qual linha voce deseja posicionar sua frota'))
-    coluna= int(input('Qual coluna voce deseja posicionar sua frota'))
+        while True:
+            linha = int(input('Linha: '))
+            coluna = int(input('Coluna: '))
 
-    if nome != 'submarino':
-        orientacao= input('Qual a orientação da sua frota, sendo 1[vertical], 2[horizontal]')
+            if nome != 'submarino':
+                orientacao_num = int(input('[1] Vertical [2] Horizontal >'))
+                if orientacao_num == 1:
+                    orientacao = 'vertical'
+                elif orientacao_num == 2:
+                    orientacao = 'horizontal'
+                else:
+                    print('Orientação inválida! Digite 1 ou 2.')
+                    continue
+            else:
+                orientacao = None
 
-    posicao= posicao_valida(dicio_frota, linha, coluna, orientacao, tamanho)
-
-    while posicao != True:
-        print('Esta posição não está válida!')
-        linha= int(input('Qual linha voce deseja posicionar sua frota'))
-        coluna= int(input('Qual coluna voce deseja posicionar sua frota'))
-        if nome != 'submarino':
-            orientacao= input('Qual a orientação da sua frota, sendo 1[vertical], 2[horizontal]')
-
-    else:
-        def_posi= define_posicoes(linha, coluna, orientacao,tamanho)
-        frota= preenche_frota (dicio_frota, nome, linha, coluna, orientacao, tamanho)
+            if posicao_valida(dicio_frota, linha, coluna, orientacao, tamanho):
+                dicio_frota = preenche_frota(dicio_frota, nome, linha, coluna, orientacao, tamanho)
+                break
+            else:
+                print('Esta posição não está válida!')
 
 print(dicio_frota)
